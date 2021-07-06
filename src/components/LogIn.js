@@ -7,7 +7,7 @@ const LogIn = () => {
     const [email, setEmail] = React.useState('') // hooks
     const [password, setPass] = React.useState('')
     const [error, setError] = React.useState(null) //Para pitar errores-null para poder pintar
-    const [esRegistro, setesRegistro] = React.useState(true)
+    const [esRegistro, setesRegistro] = React.useState(false)
 
     //validacion del formulario
     const procesarDatos = e => {
@@ -32,10 +32,32 @@ const LogIn = () => {
         
         if(esRegistro){
             registrar()
+        }else{
+            login()
         }
     }
+// funcion para loguear al usuario y validacion de errores
+    const login = React.useCallback(async() =>{
+        try{
+            const respuesta = await auth.signInWithEmailAndPassword(email, password)
+            console.log(respuesta.user)
 
-    //Funcion con metodo de firebase para crear Usuario
+        setEmail('')
+        setPass('')
+        setError(null)
+
+        }catch(error){
+            console.log(error) 
+            if(error.code ===  "auth/user-not-found"){
+                setError('Usuario no existe')
+            }
+            if(error.code ===   "auth/wrong-password"){
+                setError('Contraseña invalida')
+            }
+        }
+    }, [email, password])
+
+    //Funcion con metodo de firebase para crear Usuario y validacion de errores
     const registrar = React.useCallback(async() => {
 
         try{
@@ -46,7 +68,11 @@ const LogIn = () => {
             email:respuesta.user.email,
             uid: respuesta.user.uid
         })
-        
+
+        setEmail('')
+        setPass('')
+        setError(null)
+
         }catch (error) {
             console.log(error)
             if(error.code ===  "auth/invalid-email"){
