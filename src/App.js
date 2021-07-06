@@ -15,7 +15,7 @@ function App() {
     <Router>
       <div className='container'>
       <div>
-       <Landing />
+        <Landing />
       </div>
       <hr/>
       <Switch>
