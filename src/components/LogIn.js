@@ -1,11 +1,14 @@
 import React from 'react'
+import { auth, db} from './firebase'
 
-const LoginAndRegister = () => {
 
-    const [email, setEmail] = React.useState('') 
+const LogIn = () => {
+
+    const [email, setEmail] = React.useState('') // hooks
     const [password, setPass] = React.useState('')
     const [error, setError] = React.useState(null) //Para pitar errores-null para poder pintar
     const [esRegistro, setesRegistro] = React.useState(true)
+
     //validacion del formulario
     const procesarDatos = e => {
         e.preventDefault()
@@ -26,7 +29,38 @@ const LoginAndRegister = () => {
         }
         console.log('correcto...')
         setError(null) //Se  pasa a null para que desaparezcan los errores de validaciones
+        
+        if(esRegistro){
+            registrar()
+        }
     }
+
+    //Funcion con metodo de firebase para crear Usuario
+    const registrar = React.useCallback(async() => {
+
+        try{
+        const respuesta = await auth.createUserWithEmailAndPassword(email, password)
+        console.log(respuesta.user)
+        //Relacionar aunth con firestore
+        await db.collection('notes').doc(respuesta.user.email).set({
+            email:respuesta.user.email,
+            uid: respuesta.user.uid
+        })
+        
+        }catch (error) {
+            console.log(error)
+            if(error.code ===  "auth/invalid-email"){
+                setError('Email no valido')
+            }
+
+            if(error.code ===  "auth/email-already-in-use"){
+                setError('Email ya utilizado')
+            }
+          
+        }
+
+    }, [email, password])
+
 
     return (
         <div className="form-register">
@@ -83,4 +117,5 @@ const LoginAndRegister = () => {
     )
 }
 
-export default LoginAndRegister
+
+export default LogIn
