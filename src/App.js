@@ -1,6 +1,5 @@
 import React from 'react';
-import Landing from './components/Landing'
-import SignUp from './components/SignUp';
+import Nav from './components/Nav'
 import LogIn from './components/LogIn';
 import {
   BrowserRouter as Router,
@@ -15,12 +14,12 @@ function App() {
     <Router>
       <div className='container'>
       <div>
-        <Landing />
+        <Nav />
       </div>
       <hr/>
       <Switch>
-        <Route path="/register">
-          <SignUp />
+      <Route path="/" exact>
+          inicio...
         </Route>
         <Route path="/login">
           <LogIn />
