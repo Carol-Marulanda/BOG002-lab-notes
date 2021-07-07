@@ -9,7 +9,7 @@ const LogIn = () => { //Se llaman los props de History
     const [email, setEmail] = React.useState('') // hooks
     const [password, setPass] = React.useState('')
     const [error, setError] = React.useState(null) //Para pitar errores-null para poder pintar
-    const [esRegistro, setesRegistro] = React.useState(true)
+    const [esRegistro, setesRegistro] = React.useState(false)
     const history = useHistory();
    
 
@@ -80,6 +80,7 @@ const LogIn = () => { //Se llaman los props de History
         setEmail('')
         setPass('')
         setError(null)
+        history.push('/timeline')
         //props.history.push("/timeline")
     }catch (error) {
             console.log(error)
