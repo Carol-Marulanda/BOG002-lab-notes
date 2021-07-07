@@ -1,13 +1,17 @@
 import React from 'react'
 import { auth, db} from './firebase'
+import { withRouter, useHistory } from 'react-router-dom'//Permite empujar al usuario a diferentes rutas
 
 
-const LogIn = () => {
+
+const LogIn = () => { //Se llaman los props de History
 
     const [email, setEmail] = React.useState('') // hooks
     const [password, setPass] = React.useState('')
     const [error, setError] = React.useState(null) //Para pitar errores-null para poder pintar
-    const [esRegistro, setesRegistro] = React.useState(false)
+    const [esRegistro, setesRegistro] = React.useState(true)
+    const history = useHistory();
+   
 
     //validacion del formulario
     const procesarDatos = e => {
@@ -36,15 +40,19 @@ const LogIn = () => {
             login()
         }
     }
+
+
 // funcion para loguear al usuario y validacion de errores
     const login = React.useCallback(async() =>{
+        
         try{
             const respuesta = await auth.signInWithEmailAndPassword(email, password)
             console.log(respuesta.user)
-
+    
         setEmail('')
         setPass('')
         setError(null)
+        history.push('/timeline')
 
         }catch(error){
             console.log(error) 
@@ -60,7 +68,7 @@ const LogIn = () => {
     //Funcion con metodo de firebase para crear Usuario y validacion de errores
     const registrar = React.useCallback(async() => {
 
-        try{
+    try{
         const respuesta = await auth.createUserWithEmailAndPassword(email, password)
         console.log(respuesta.user)
         //Relacionar aunth con firestore
@@ -72,8 +80,8 @@ const LogIn = () => {
         setEmail('')
         setPass('')
         setError(null)
-
-        }catch (error) {
+        //props.history.push("/timeline")
+    }catch (error) {
             console.log(error)
             if(error.code ===  "auth/invalid-email"){
                 setError('Email no valido')
@@ -144,4 +152,4 @@ const LogIn = () => {
 }
 
 
-export default LogIn
+export default withRouter(LogIn) //Se envuelve el componente, withRouter genera props

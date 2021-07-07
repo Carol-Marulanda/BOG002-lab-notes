@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from './components/Nav'
 import LogIn from './components/LogIn';
+import TimeLine from './components/TimeLine';
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,7 +26,7 @@ function App() {
           <LogIn />
         </Route>
         <Route path="/timeline">
-          <LogIn />
+         <TimeLine />
         </Route>
       </Switch>
       </div>

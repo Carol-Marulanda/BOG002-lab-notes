@@ -10,6 +10,10 @@ const Nav = () => {
                 <NavLink  className="btn-nav" to="/" exact>
                     Inicio
                 </NavLink>
+
+                <NavLink className="btn-nav"  to="/timeline" >
+                    Notas
+                </NavLink>
             
                 <NavLink className="btn-nav"  to="/login" >
                     Login
