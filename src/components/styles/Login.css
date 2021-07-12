@@ -1,0 +1,9 @@
+.text-center{
+    width:100%;
+    display: grid;
+    margin: revert;
+    text-align: center;
+        color: blue;
+    font-size: x-large;
+    font-family: fangsong;
+}

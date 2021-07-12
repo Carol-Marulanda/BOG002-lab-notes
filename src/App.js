@@ -2,8 +2,9 @@ import React from 'react';
 import Nav from './components/Nav'
 import LogIn from './components/LogIn';
 import TimeLine from './components/TimeLine';
+// import Landing from './components/Landing'
 import { BrowserRouter as Router, Switch, Route, } from "react-router-dom";
-import { auth } from './components/firebase'
+import { auth } from './firebase'
 import './App.css';
 
 
@@ -29,18 +30,19 @@ function App() {
     <Router>
       <div className='container'>
       <div>
-        <Nav />
+        <Nav firebaseUser={firebaseUser} />   
       </div>
       <hr/>
       <Switch>
-      <Route path="/" exact>
-          inicio...
-        </Route>
+      
         <Route path="/login">
           <LogIn />
         </Route>
         <Route path="/timeline">
-         <TimeLine />
+          <TimeLine />
+        </Route>
+        <Route path="/" >
+          Inicio....
         </Route>
       </Switch>
       </div>

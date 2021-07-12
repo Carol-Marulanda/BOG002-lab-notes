@@ -1,21 +1,23 @@
 import React from 'react'
-import { auth } from './firebase'
+import { auth } from '../firebase'
 import { withRouter} from 'react-router-dom'
 
 
 const timeLine = (props) => {
-
+    //const history = useHistory()
     const [user, setUser] = React.useState(null)
 
     React.useEffect(() => {
-
+        
         if(auth.currentUser){ // Se trae toda la info de CurrenUser
             console.log('Existe el usuario')
-            user
+            
             setUser(auth.currentUser)
-        }else{
+        }else {
             console.log('no existe el usuario')
-            props.history.push("/login")
+            props.history.push('/login')
+
+              // Si no existe el usuario se renderiza a login
 
         }
     }, [])
@@ -23,6 +25,11 @@ const timeLine = (props) => {
     return (
         <div>
             <h1>cuerpo de Lab Notes</h1>
+            {
+                user && (
+                    <p>{user.email}</p>
+                )
+            }
         </div>
     )
 }

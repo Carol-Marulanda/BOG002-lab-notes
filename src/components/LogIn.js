@@ -1,6 +1,7 @@
 import React from 'react'
-import { auth, db} from './firebase'
+import { auth, db} from '../firebase'
 import { withRouter, useHistory } from 'react-router-dom'//Permite empujar al usuario a diferentes rutas
+import  './styles/Login.css'
 
 
 
@@ -63,7 +64,7 @@ const LogIn = () => { //Se llaman los props de History
                 setError('Contraseña invalida')
             }
         }
-    }, [email, password])
+    }, [email, password, history])
 
     //Funcion con metodo de firebase para crear Usuario y validacion de errores
     const registrar = React.useCallback(async() => {
@@ -94,7 +95,7 @@ const LogIn = () => { //Se llaman los props de History
           
         }
 
-    }, [email, password])
+    }, [email, password, history])
 
 
     return (
@@ -104,9 +105,9 @@ const LogIn = () => { //Se llaman los props de History
                         esRegistro ? 'Registro de usuarios' : 'Inicia Sesiòn'
                 }
             </h3>
-            <hr/>
-            <div className="">
-                <div className="">
+            
+            <div className="form-datos">
+                <div className="form-inputs">
                     <form onSubmit={procesarDatos}> 
 
                     {                               //Si existe un error se pintan aqui llamamos al error
