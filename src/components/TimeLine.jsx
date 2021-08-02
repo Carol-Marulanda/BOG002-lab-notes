@@ -1,11 +1,13 @@
 import React from 'react'
-import { auth } from '../firebase'
+import { auth} from '../firebase'
 import { withRouter} from 'react-router-dom'
+import Firestore from './Firestore'
 
 
 const timeLine = (props) => {
     //const history = useHistory()
     const [user, setUser] = React.useState(null)
+    
 
     React.useEffect(() => {
         
@@ -20,14 +22,15 @@ const timeLine = (props) => {
               // Si no existe el usuario se renderiza a login
 
         }
+
+       
     }, [])
 
     return (
         <div>
-            <h1>cuerpo de Lab Notes</h1>
             {
                 user && (
-                    <p>{user.email}</p>
+                    <Firestore user={user}/>  
                 )
             }
         </div>

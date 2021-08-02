@@ -1,6 +1,6 @@
 .navbar{
     padding: 0;
-    background-color:rgb(142, 191, 238);
+    background-color:#8ebfee;
     width: 90%;
     max-width: 1000px;
     margin: auto;
@@ -13,10 +13,11 @@
 .navbar-brand{
     text-decoration: none;
     color:white;
-    padding: 20px;
+    padding: 10px;
     display: block; 
     text-align:left;
     background: blue;
+    height: 16vh;
 }
 
 .btn-nav{

@@ -1,9 +1,81 @@
+
+
+.form-datos{
+    background: rgb(245, 253, 252);
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin: auto;
+    border-radius: 15px; 
+    margin-top: 40px;
+
+}
+
 .text-center{
     width:100%;
     display: grid;
     margin: revert;
     text-align: center;
-        color: blue;
+    color: rgb(0, 0, 255);
     font-size: x-large;
-    font-family: fangsong;
+    font-family: 'fangsong';
+}
+
+.btn{
+    background: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin-top: 20px;
+    padding: 10px 10px 10px 5px;
+    box-shadow: 0 0 6px 0 rgb(255 255 255 / 50%);
+    border:none;
+    border-bottom: 1px solid rgb(142, 191, 238); 
+}
+
+.btn:focus{
+    outline: none;
+    color: #a9a9a9;
+}
+
+::placeholder{
+    color: rgb(148, 148, 161);
+    font-size: 16px;
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    transition: 0.5s ease all;
+    pointer-events: none;
+}
+
+.btn:focus ~ ::placeholder
+{
+    top: -10px;
+    font-size: 12px;
+    color: rgb(66, 66, 248);
+}
+
+.btn-login{
+    font-family: 'roboto';
+    background: #4568DC;
+    background: -webkit-linear-gradient(to right, #8ebfee, #4568DC);
+    background: linear-gradient(to right, #8ebfee, #4568DC);
+    border:none;
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    color: white;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+@media(max-width:360px){
+  .form-datos{
+    width:60%
+  }
 }

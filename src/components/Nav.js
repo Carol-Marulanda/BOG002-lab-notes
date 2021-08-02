@@ -18,7 +18,10 @@ const Nav = () => {
 
     return (
         <div className="navbar ">
-        <Link to="/" className="navbar-brand"><img src={logo}></img></Link>
+        <Link to="/" 
+            className="navbar-brand">
+            <img src={logo}></img>
+        </Link>
         <nav>
             <div className="nav">
                 <NavLink  className="btn-nav" to="/" exact>
@@ -33,8 +36,8 @@ const Nav = () => {
                 }
 
                 
-                {
-                    auth.currentUser !== null ? (
+                    
+                { auth.currentUser !== null ? (
                         <button
                         onClick={() =>logout()} 
                         >Cerrar Sesión
@@ -46,10 +49,7 @@ const Nav = () => {
                         </NavLink>
                     )
                 }
-               
-                    
                 
-                    
             </div>
         </nav>
     </div>

@@ -9,7 +9,7 @@ const LogIn = () => { //Se llaman los props de History
 
     const [email, setEmail] = React.useState('') // hooks
     const [password, setPass] = React.useState('')
-    const [error, setError] = React.useState(null) //Para pitar errores-null para poder pintar
+    const [error, setError] = React.useState(null)
     const [esRegistro, setesRegistro] = React.useState(false)
     const history = useHistory();
    
@@ -19,7 +19,7 @@ const LogIn = () => { //Se llaman los props de History
         e.preventDefault()
         if(!email.trim()){
            // console.log('Datos vacíos email!')
-            setError('Datos vacíos email!') //Se manda el string para que pinte
+            setError('Datos vacíos email!') 
             return
         }
         if(!password.trim()){
@@ -33,7 +33,7 @@ const LogIn = () => { //Se llaman los props de History
             return
         }
         console.log('correcto...')
-        setError(null) //Se  pasa a null para que desaparezcan los errores de validaciones
+        setError(null) 
         
         if(esRegistro){
             registrar()
@@ -77,7 +77,11 @@ const LogIn = () => { //Se llaman los props de History
             email:respuesta.user.email,
             uid: respuesta.user.uid
         })
-
+        await db.collection(respuesta.user.uid).add({
+            name:'nota de ejemplo',
+            fecha:Date.now()
+        })
+      
         setEmail('')
         setPass('')
         setError(null)
@@ -99,15 +103,15 @@ const LogIn = () => { //Se llaman los props de History
 
 
     return (
-        <div className="form-register">
-            <h3 className="text-center">
+        <div className="form-datos">
+            <div className="form">
+                <h1 className="text-center">
                 {
                         esRegistro ? 'Registro de usuarios' : 'Inicia Sesiòn'
                 }
-            </h3>
+                </h1>
             
-            <div className="form-datos">
-                <div className="form-inputs">
+                <div className="form">
                     <form onSubmit={procesarDatos}> 
 
                     {                               //Si existe un error se pintan aqui llamamos al error
@@ -119,20 +123,20 @@ const LogIn = () => { //Se llaman los props de History
                     }
                         <input 
                             type="email" 
-                            className=""
+                            className="btn"
                             placeholder="Ingrese Email"
                             onChange= {e => setEmail(e.target.value)}// onchange se tiliza para relacionar con el input al setEmail
                             value={email}
                         />
                         <input 
                             type="password" 
-                            className="btn-password"
+                            className="btn"
                             placeholder="Ingrese Contraseña"
                             onChange= {e => setPass(e.target.value)}
                             value={password}
                         />
                         <button 
-                            className="btn-register"
+                            className="btn-login"
                             type="submit"
                         >
                             {esRegistro ? 'Registrarse' : 'Acceder'}

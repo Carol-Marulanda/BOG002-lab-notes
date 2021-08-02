@@ -2,6 +2,8 @@
 
 .landing{
    position: center;
-   background-color: blueviolet;
+   display: flex;
+   justify-content: center;
+   margin-top: 40px;
 }
 

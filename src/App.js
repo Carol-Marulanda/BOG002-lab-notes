@@ -1,8 +1,8 @@
 import React from 'react';
-import Nav from './components/Nav'
-import LogIn from './components/LogIn';
-import TimeLine from './components/TimeLine';
-// import Landing from './components/Landing'
+import Nav from './components/Nav.js'
+import LogIn from './components/LogIn.jsx';
+import TimeLine from './components/TimeLine.jsx';
+import Landing from './components/Landing.jsx'
 import { BrowserRouter as Router, Switch, Route, } from "react-router-dom";
 import { auth } from './firebase'
 import './App.css';
@@ -32,7 +32,7 @@ function App() {
       <div>
         <Nav firebaseUser={firebaseUser} />   
       </div>
-      <hr/>
+      
       <Switch>
       
         <Route path="/login">
@@ -42,7 +42,7 @@ function App() {
           <TimeLine />
         </Route>
         <Route path="/" >
-          Inicio....
+          <Landing />
         </Route>
       </Switch>
       </div>
