@@ -1,14 +1,15 @@
-
 import React from 'react'
 import { db } from '../firebase'
 import Delete from './Delete.jsx'
-import Edit from './Edit.jsx'
+//import Edit from './Edit.jsx'
 
 function Firestore(props) {
     //console.log(props)
 
     const [nota, setNota] = React.useState([])
     const [notas, setNotas] = React.useState('')
+    const [modoEdicion, setmodoEdicion] = React.useState(false)
+    const [id, setId] = React.useState('')
 
     const obtenerDatos = async () => {
 
@@ -85,6 +86,37 @@ function Firestore(props) {
     //                 }
     // }
 
+    const activarEdicion = (item) => {
+        setmodoEdicion(true)
+        setNotas(item.name)
+        setId(item.id)
+        
+    }
+
+    const editar = async (e) => {
+        e.preventDefault()
+        if(!notas.trim()){
+            console.log('vacio')
+            return
+        }
+
+        try{
+            
+            await db.collection(props.user.uid).doc(id).update({
+                name: notas
+
+            })
+            
+            setmodoEdicion(false)
+            setNotas('')
+            setId('')
+
+        } catch(error){
+            console.log(error)
+        }
+
+    }
+
     return (
         <div className='container'>
             <div className=''>
@@ -94,21 +126,26 @@ function Firestore(props) {
                             nota.map(item => (    //rrecorrido map para iterar los datos
                                 <li key={item.id}>
                                     {item.name}
-                                    {/* <button
-                                        onClick={() => eliminar(item.id)}
-                                    >
-                                        Eliminar
-                                    </button> */}
+                                    
                                     <Delete user={props.user} id={item.id} nota={nota} setNota={setNota}/>
-                                    <Edit />
+                                    {/* <Edit /> */}
+                                    <button
+                                        onClick={() => activarEdicion(item)}
+                                    >
+                                        Editar
+                                    </button>
                                 </li>
                             ))
                         }
                     </ul>
                 </div>
                 <div>
-                    <h3>Notas</h3>
-                    <form onSubmit={agregar}>
+                    <h3>
+                        {
+                            modoEdicion ? 'Editar nota' : 'Agregar Nota'
+                        }
+                    </h3>
+                    <form onSubmit={modoEdicion ? editar : agregar}>
                         <input 
                             className=''
                             type="text" 
@@ -120,7 +157,9 @@ function Firestore(props) {
                             className=''
                             type='submit'
                         >
-                            Agregar
+                            {
+                                modoEdicion ? 'Editar' : 'Agregar'
+                            }
                         </button>
                     </form>
                 </div>
